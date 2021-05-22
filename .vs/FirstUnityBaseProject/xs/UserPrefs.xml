@@ -1,0 +1,31 @@
+﻿<Properties StartupConfiguration="{637A191E-6524-8CC0-C867-C46AAD8E05D4}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Base/Systems/Utilities/Singleton.cs">
+    <Files>
+      <File FileName="Assets/Base/Systems/Utilities/Singleton.cs" Line="31" Column="18" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="FirstUnityBaseProject" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Base" expanded="True">
+                <Node name="Systems" expanded="True">
+                  <Node name="Utilities" expanded="True">
+                    <Node name="Singleton.cs" selected="True" />
+                  </Node>
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="49955cc5-6d2c-44c7-97fe-5112de4c1698" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
