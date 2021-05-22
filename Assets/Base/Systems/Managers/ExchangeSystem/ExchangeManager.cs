@@ -19,6 +19,7 @@ public class ExchangeManager : Singleton<ExchangeManager>
         }
         exchangeDictionary[type]+= amount;
         DataManager.Instance.SaveData("ExchangeData", exchangeDictionary);
+        EventSystem.TriggerEvent("OnExchange", exchangeDictionary[type]);
     }
 
     public void Load()
@@ -38,6 +39,7 @@ public class ExchangeManager : Singleton<ExchangeManager>
         if (!isLoaded) Load();
         exchangeDictionary[type] = amount;
         DataManager.Instance.SaveData("ExchangeData", exchangeDictionary);
+        EventSystem.TriggerEvent("OnExchange", exchangeDictionary[type]);
     }
 
 }
