@@ -9,10 +9,10 @@ public class Json : Singleton<Json>
     {
         return JsonUtility.ToJson(value);
     }
-
-    public static T ConvertFromJson<T>(string value, Type type)
+    //Type is required for abstract and interfaces
+    public static T ConvertFromJson<T>(string value, Type type = null)
     {
-        return (T) JsonUtility.FromJson(value, type);
+        return (T) JsonUtility.FromJson(value, type != null ? type : typeof(T));
     }
 
 }
