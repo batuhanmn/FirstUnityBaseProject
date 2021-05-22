@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Json : Singleton<Json>
+public static class Json
 {
     public static string ConvertToJson<T>(T value)
     {
