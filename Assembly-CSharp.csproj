@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Assets\Base\Systems\Managers\DataSystem\DataManager.cs" />
     <Compile Include="Assets\Base\Systems\Managers\DataSystem\Interfaces\IData.cs" />
+    <Compile Include="Assets\Base\Systems\Managers\EventSystem\EventSystem.cs" />
     <Compile Include="Assets\Base\Systems\Utilities\Json.cs" />
     <Compile Include="Assets\Base\Systems\Utilities\Singleton.cs" />
     <Reference Include="UnityEngine">
