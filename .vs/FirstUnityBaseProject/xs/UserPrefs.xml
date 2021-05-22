@@ -1,7 +1,9 @@
 ﻿<Properties StartupConfiguration="{637A191E-6524-8CC0-C867-C46AAD8E05D4}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Base/Systems/Utilities/Singleton.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Base/Systems/Utilities/Json.cs">
     <Files>
-      <File FileName="Assets/Base/Systems/Utilities/Singleton.cs" Line="31" Column="18" />
+      <File FileName="Assets/Base/Systems/Utilities/Singleton.cs" Line="1" Column="1" />
+      <File FileName="Assets/Base/Systems/Utilities/Json.cs" Line="13" Column="71" />
+      <File FileName="Assets/Base/Systems/Managers/DataSystem/DataManager.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -10,11 +12,17 @@
             <Node name="Assets" expanded="True">
               <Node name="Base" expanded="True">
                 <Node name="Systems" expanded="True">
+                  <Node name="Managers" expanded="True">
+                    <Node name="DataSystem" expanded="True">
+                      <Node name="Interfaces" expanded="True" />
+                    </Node>
+                  </Node>
                   <Node name="Utilities" expanded="True">
-                    <Node name="Singleton.cs" selected="True" />
+                    <Node name="Json.cs" selected="True" />
                   </Node>
                 </Node>
               </Node>
+              <Node name="Game Data" expanded="True" />
             </Node>
           </Node>
         </State>
