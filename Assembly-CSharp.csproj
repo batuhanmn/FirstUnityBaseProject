@@ -68,6 +68,7 @@
     <Compile Include="Assets\Base\Systems\Managers\DataSystem\Interfaces\IData.cs" />
     <Compile Include="Assets\Base\Systems\Managers\EventSystem\EventSystem.cs" />
     <Compile Include="Assets\Base\Systems\Managers\ExchangeSystem\ExchangeManager.cs" />
+    <Compile Include="Assets\Base\Systems\Managers\InputSystem\InputSystem.cs" />
     <Compile Include="Assets\Base\Systems\Managers\PoolingSystem\Interfaces\IPoolable.cs" />
     <Compile Include="Assets\Base\Systems\Managers\PoolingSystem\PoolContainer.cs" />
     <Compile Include="Assets\Base\Systems\Managers\PoolingSystem\PoolingSystem.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Assets\Base\Systems\Managers\UISystem\UIManager.cs" />
     <Compile Include="Assets\Base\Systems\Utilities\Json.cs" />
     <Compile Include="Assets\Base\Systems\Utilities\Singleton.cs" />
+    <None Include="Assets\ThirdPartyAssets\Lean\READ ME.txt" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2019.4.17f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -640,7 +642,16 @@
       <HintPath>/Users/batuhanemen/Documents/Unity/FirstUnityBaseProject/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="LeanCommon.csproj">
+      <Project>{3E95B2C7-BB66-7926-7BD2-7BE5B5C96A00}</Project>
+      <Name>LeanCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="LeanTouch.csproj">
+      <Project>{9C50FE13-7AB4-CAE1-F94C-377FAA87E37A}</Project>
+      <Name>LeanTouch</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
