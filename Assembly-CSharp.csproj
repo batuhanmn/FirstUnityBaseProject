@@ -71,6 +71,8 @@
     <Compile Include="Assets\Base\Systems\Managers\PoolingSystem\Interfaces\IPoolable.cs" />
     <Compile Include="Assets\Base\Systems\Managers\PoolingSystem\PoolContainer.cs" />
     <Compile Include="Assets\Base\Systems\Managers\PoolingSystem\PoolingSystem.cs" />
+    <Compile Include="Assets\Base\Systems\Managers\UISystem\PanelBase.cs" />
+    <Compile Include="Assets\Base\Systems\Managers\UISystem\UIManager.cs" />
     <Compile Include="Assets\Base\Systems\Utilities\Json.cs" />
     <Compile Include="Assets\Base\Systems\Utilities\Singleton.cs" />
     <Reference Include="UnityEngine">
