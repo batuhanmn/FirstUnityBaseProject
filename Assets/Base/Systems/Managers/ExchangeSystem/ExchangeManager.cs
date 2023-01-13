@@ -41,5 +41,4 @@ public class ExchangeManager : Singleton<ExchangeManager>
         DataManager.Instance.SaveData("ExchangeData", exchangeDictionary);
         EventSystem.TriggerEvent("OnExchange", exchangeDictionary[type]);
     }
-
 }

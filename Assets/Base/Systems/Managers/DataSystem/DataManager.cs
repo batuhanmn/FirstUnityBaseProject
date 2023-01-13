@@ -31,7 +31,7 @@ public class DataManager : Singleton<DataManager>
     }
     #endregion
 
-    #region InitFunctioms
+    #region InitFunctions
     //DataManager.Instance.SetData(new GameData())
     public void SetData(IData idata)
     {
@@ -57,5 +57,4 @@ public class DataManager : Singleton<DataManager>
         PlayerPrefs.Save();
         isDirty = false;
     }
-
 }

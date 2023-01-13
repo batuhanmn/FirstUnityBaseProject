@@ -14,5 +14,4 @@ public static class Json
     {
         return (T) JsonUtility.FromJson(value, type != null ? type : typeof(T));
     }
-
 }
