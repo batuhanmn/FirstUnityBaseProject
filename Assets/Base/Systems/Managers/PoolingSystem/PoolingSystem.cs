@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,95 +10,83 @@ public class PoolObject
     public GameObject Object;
 }
 
-public class PoolingSystem : MonoBehaviour
+public class PoolingSystem : Singleton<PoolingSystem>
 {
-    public static PoolingSystem Instance;
     private bool isLoaded;
-    private PoolContainer container;
-    private Dictionary<string, Queue<GameObject>> PoolDictionary = new Dictionary<string, Queue<GameObject>>();
-
+    private PoolContainer _container;
+    private Dictionary<string, Queue<GameObject>> _poolDictionary = new Dictionary<string, Queue<GameObject>>();
+    private GameObject _poolContainer;
     private void Start()
     {
+        _poolContainer = new GameObject("PoolContainer");
         Init();
     }
-
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
-    }
-
-    public GameObject Instantiate(string ID, Vector3 Position, Quaternion Rotation, Transform Parent = null)
+    
+    public GameObject Instantiate(string id, Vector3 position, Quaternion rotation, Transform parent = null)
     {
         if (!isLoaded) Load();
-        if (!PoolDictionary.ContainsKey(ID))
+        if (!_poolDictionary.ContainsKey(id))
         {
-            PoolDictionary[ID] = new Queue<GameObject>();
+            _poolDictionary[id] = new Queue<GameObject>();
         }
 
-        if (PoolDictionary[ID].Count == 0)
+        if (_poolDictionary[id].Count == 0)
         {
-            CreateObject(ID);
+            CreateObject(id);
         }
 
-        GameObject _obj = PoolDictionary[ID].Dequeue();
+        GameObject obj = _poolDictionary[id].Dequeue();
 
-        IPoolable poolable = _obj.GetComponent<IPoolable>();
+        IPoolable poolable = obj.GetComponent<IPoolable>();
         if (poolable != null) poolable.OnGetFromPool();
 
-        _obj.transform.position = Position;
-        _obj.transform.rotation = Rotation;
-        _obj.transform.SetParent(Parent);
-        _obj.SetActive(true);
-        return _obj;
+        obj.transform.position = position;
+        obj.transform.rotation = rotation;
+        obj.transform.SetParent(parent);
+        obj.SetActive(true);
+        return obj;
     }
 
-    public void Destroy(string ID, GameObject Object)
+    public void Destroy(string id, GameObject @object)
     {
-        IPoolable poolable = Object.GetComponent<IPoolable>();
+        IPoolable poolable = @object.GetComponent<IPoolable>();
         if (poolable != null) poolable.OnReturnToPool();
-        Object.SetActive(false);
-        Object.transform.SetParent(transform);
-        PoolDictionary[ID].Enqueue(Object);
+        @object.SetActive(false);
+        @object.transform.SetParent(transform);
+        _poolDictionary[id].Enqueue(@object);
     }
 
     private void Init()
     {
         if (!isLoaded) Load();
 
-        for (int i = 0; i < container.PoolObjectList.Count; i++)
+        for (int i = 0; i < _container.PoolObjectList.Count; i++)
         {
-            for (int j = 0; j < container.PoolObjectList[i].Count; j++)
+            for (int j = 0; j < _container.PoolObjectList[i].Count; j++)
             {
-                CreateObject(container.PoolObjectList[i].Name);
+                CreateObject(_container.PoolObjectList[i].Name);
             }
         }
 
     }
 
-    private void CreateObject(string ID)
+    private void CreateObject(string id)
     {
-        GameObject obj = Instantiate(container.PoolObjects[ID].Object, transform);
+        GameObject obj = Instantiate(_container.PoolObjects[id].Object, _poolContainer.transform);
         obj.SetActive(false);
 
-        if (!PoolDictionary.ContainsKey(ID))
+        if (!_poolDictionary.ContainsKey(id))
         {
-            PoolDictionary[ID] = new Queue<GameObject>();
+            _poolDictionary[id] = new Queue<GameObject>();
         }
 
-        PoolDictionary[ID].Enqueue(obj);
+        _poolDictionary[id].Enqueue(obj);
     }
 
 
     private void Load()
     {
-        container = Resources.Load<PoolContainer>("PoolingSystemData/PoolContainer");
+        _container = Resources.Load<PoolContainer>("PoolingSystemData/PoolContainer");
         isLoaded = true;
     }
 }

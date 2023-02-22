@@ -15,38 +15,30 @@ public class UIManager : Singleton<UIManager>
 {
     public Dictionary<string, GameObject> UICreatedDictionary = new Dictionary<string, GameObject>();
     private Canvas canvas;
+    public Canvas Canvas => canvas? canvas : canvas = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<Canvas>();
 
-    public void ShowPanel(string PanelID, params object[] Variables)
+    public void ShowPanel(string panelID, params object[] variables)
     {
-        if (!UICreatedDictionary.ContainsKey(PanelID) || UICreatedDictionary[PanelID] == null)
+        if (!UICreatedDictionary.ContainsKey(panelID) || UICreatedDictionary[panelID] == null)
         {
-            GameObject panel = Instantiate(PanelLoad(PanelID).gameObject,canvas.transform);
-            UICreatedDictionary[PanelID] = panel;
+            GameObject panel = Instantiate(PanelLoad(panelID).gameObject,Canvas.transform);
+            UICreatedDictionary[panelID] = panel;
         }
 
-        UICreatedDictionary[PanelID].transform.SetParent(canvas.transform);
-        UICreatedDictionary[PanelID].GetComponent<PanelBase>().ShowPanel(Variables);
-        EventSystem.TriggerEvent("OnShowPanel",PanelID);
+        UICreatedDictionary[panelID].transform.SetParent(Canvas.transform);
+        UICreatedDictionary[panelID].GetComponent<PanelBase>().ShowPanel(variables);
+        EventSystem.TriggerEvent("OnShowPanel",panelID);
     }
 
-    public void HidePanel(string PanelID)
+    public void HidePanel(string panelID)
     {
-        UICreatedDictionary[PanelID].GetComponent<PanelBase>().HidePanel();
-        UICreatedDictionary[PanelID].transform.SetParent(transform);
-        EventSystem.TriggerEvent("OnHidePanel", PanelID);
+        UICreatedDictionary[panelID].GetComponent<PanelBase>().HidePanel();
+        UICreatedDictionary[panelID].transform.SetParent(transform);
+        EventSystem.TriggerEvent("OnHidePanel", panelID);
     }
 
-    private PanelBase PanelLoad(string PanelID)
+    private PanelBase PanelLoad(string panelID)
     {
-        return Resources.Load<PanelBase>("UISystemData/Panels/"+PanelID);
+        return Resources.Load<PanelBase>("UISystemData/Panels/"+panelID);
     }
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += (a, b) =>
-        {
-            canvas = GameObject.FindGameObjectWithTag("MainCanvas").GetComponent<Canvas>();
-        };
-    }
-
 }

@@ -5,7 +5,7 @@ using System;
 
 public interface IData
 {
-    T GetData<T>(string Key);
-    void UpdateData<T>(string Key, T Value);
+    T GetData<T>(string key);
+    void UpdateData<T>(string Key, T value);
     Type GetDataType(); 
 }

@@ -1,26 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public class DataManager : Singleton<DataManager>
 {
     private const string LOCATION_KEY = "DataManager.Data";
-    private IData data;
+    private IData _data;
     private bool isDirty;
     private bool isLoaded;
 
     #region DataFunctions
 
-    public void SaveData<T>(string Key, T Value)
+    public void SaveData<T>(string key, T value)
     {
-        data.UpdateData(Key, Value);
+        _data.UpdateData(key, value);
         isDirty = true;
     }
-    public T GetData<T>(string Key)
+    public T GetData<T>(string key)
     {
         if(!isLoaded) LoadData();
-        return data.GetData<T>(Key);
+        return _data.GetData<T>(key);
     }
 
     public void DeleteData()
@@ -33,28 +31,30 @@ public class DataManager : Singleton<DataManager>
 
     #region InitFunctions
     //DataManager.Instance.SetData(new GameData())
-    public void SetData(IData idata)
+    public void SetData(IData iData)
     {
-        data = idata;
+        _data = iData;
     }
     #endregion
 
     private void LoadData()
     {
-        data = Json.ConvertFromJson<IData>(PlayerPrefs.GetString(LOCATION_KEY), data.GetDataType());
+        SetData(new GameData());
+        _data = Json.ConvertFromJson<IData>(PlayerPrefs.GetString(LOCATION_KEY), _data.GetDataType()) ?? default;
         isLoaded = true;
     }
 
-    private bool CheckHasKey(string Key)
+    private bool CheckHasKey(string key)
     {
-        return PlayerPrefs.HasKey(Key);
+        return PlayerPrefs.HasKey(key);
     }
 
     private void LateUpdate()
     {
         if (!isDirty) return;
-        PlayerPrefs.SetString(LOCATION_KEY, Json.ConvertToJson(data));
+        PlayerPrefs.SetString(LOCATION_KEY, Json.ConvertToJson(_data));
         PlayerPrefs.Save();
         isDirty = false;
     }
 }
+
