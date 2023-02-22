@@ -56,3 +56,5 @@ Builds
 .gradle/
 # Recordings can get excessive in size
 /[Rr]ecordings/
+Library/ArtifactDB
+Library/ArtifactDB
