@@ -1,13 +1,23 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class GameData : IData
 {
-    private readonly Dictionary<string, object> _dataCollection = new Dictionary<string, object>();
+    public Dictionary<string, object> DataCollection = new Dictionary<string, object>();
     public T GetData<T>(string key)
     {
-        var data = _dataCollection.ContainsKey(key) ? Json.ConvertFromJson<T>(_dataCollection[key].ToString()) : default(T);
-        return data;
+        T _data;
+        if (DataCollection.ContainsKey(key))
+        {
+            _data = Json.ConvertFromJson<T>(DataCollection[key].ToString());
+        }
+        else
+        {
+            _data = default(T);
+        }
+        return _data;
     }
 
     public Type GetDataType()
@@ -17,13 +27,13 @@ public class GameData : IData
 
     public void UpdateData<T>(string key, T value)
     {
-        if (_dataCollection.ContainsKey(key))
+        if (DataCollection.ContainsKey(key))
         {
-            _dataCollection[key] = Json.ConvertToJson(value);
+            DataCollection[key] = Json.ConvertToJson(value);
         }
         else
         {
-            _dataCollection.Add(key, value);
+            DataCollection.Add(key, value);
         }
     }
 }

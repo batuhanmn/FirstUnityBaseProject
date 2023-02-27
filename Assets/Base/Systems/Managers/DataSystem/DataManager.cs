@@ -40,7 +40,14 @@ public class DataManager : Singleton<DataManager>
     private void LoadData()
     {
         SetData(new GameData());
-        _data = Json.ConvertFromJson<IData>(PlayerPrefs.GetString(LOCATION_KEY), _data.GetDataType()) ?? default;
+        if (CheckHasKey(LOCATION_KEY))
+        {
+            _data = Json.ConvertFromJson<IData>(PlayerPrefs.GetString(LOCATION_KEY), _data.GetDataType());
+        }else
+        {
+            _data = new GameData();
+            isDirty = true;
+        }
         isLoaded = true;
     }
 
@@ -57,4 +64,3 @@ public class DataManager : Singleton<DataManager>
         isDirty = false;
     }
 }
-

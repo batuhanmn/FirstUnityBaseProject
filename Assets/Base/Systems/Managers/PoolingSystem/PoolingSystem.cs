@@ -18,7 +18,7 @@ public class PoolingSystem : Singleton<PoolingSystem>
     private GameObject _poolContainer;
     private void Start()
     {
-        _poolContainer = new GameObject("PoolContainer");
+       
         Init();
     }
     
@@ -87,6 +87,10 @@ public class PoolingSystem : Singleton<PoolingSystem>
     private void Load()
     {
         _container = Resources.Load<PoolContainer>("PoolingSystemData/PoolContainer");
+        if (_poolContainer==null)
+        {
+            _poolContainer = new GameObject("PoolContainer");
+        }
         isLoaded = true;
     }
 }

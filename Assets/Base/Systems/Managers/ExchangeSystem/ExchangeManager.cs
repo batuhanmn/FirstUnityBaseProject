@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 public enum ExchangeType{
-    Coin
+    Coin,
 }
 
 public class ExchangeManager : Singleton<ExchangeManager>
@@ -19,17 +19,22 @@ public class ExchangeManager : Singleton<ExchangeManager>
         }
         exchangeDictionary[type]+= amount;
         DataManager.Instance.SaveData("ExchangeData", exchangeDictionary);
-        EventSystem.TriggerEvent("OnExchange", exchangeDictionary[type]);
+        EventSystem.TriggerEvent("OnExchange", type);
     }
 
     public void Load()
     {
         isLoaded = true;
         exchangeDictionary = DataManager.Instance.GetData<Dictionary<ExchangeType, float>>("ExchangeData");
+        if (exchangeDictionary==null)
+        {
+            exchangeDictionary = new Dictionary<ExchangeType, float>();
+        }
     }
 
     public float GetExchange(ExchangeType type)
     {
+        if (!isLoaded) Load();
         if (!exchangeDictionary.ContainsKey(type)) return 0;
         return exchangeDictionary[type];
     }
